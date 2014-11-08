@@ -11,5 +11,5 @@
     }
   ],
 "web_accessible_resources": ["inject-raw.js"],
-"permissions": ["cookies","http://*/*","https://*/*"]
+"permissions": ["cookies","http://*/*","https://*/*","storage"]
 }
