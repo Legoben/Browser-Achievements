@@ -7,7 +7,7 @@
 "content_scripts": [
     {
         "matches": ["http://*/*","https://*/*"],
-        "js": ["jquery.js", "main.js"]
+        "js": ["jquery.js","main.js"]
     }
   ],
 "web_accessible_resources": ["inject-raw.js"],
