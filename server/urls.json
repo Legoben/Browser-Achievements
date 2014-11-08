@@ -1,6 +1,9 @@
 {
-    'https://www.facebook.com': [
-        
+    "www.facebook.com": [
+        {"pattern":"div._5pcp._5vsi > div > span:nth-child(1) > span > a:nth-child(2)", "id":"cdas0s", "numcompleted":0, "completed_ids":[]}
     ],
+    "echo.newtechnetwork.org": [
+        {"pattern":"div.title-row > h2 > a", "id":"sfkns", "numcompleted":0, "completed_ids":[]}
+    ]
     
 }
