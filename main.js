@@ -98,8 +98,9 @@ function notifCallback() {
 }
 
 function clickCallback() {
+
     console.log("HAI WORLD")
-    
+
     var id = $(this).attr("BAClickID");
     console.log("ID", id)
     $.ajax({
@@ -176,14 +177,17 @@ document.addEventListener("mousedown", function (event) {
         console.log("CLICK!")
         var clicked = event.target;
         elements.push(clicked.className);
-        alert(elements.slice(-1)[0]);
     }
 }, true);
+//alert(clickEl);
+        
+
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         console.log(sender.tab ?
             "from a content script:" + sender.tab.url :
             "from the extension");
+
         if (request.greeting == "clickCL")
             sendResponse({
                 farewell: elements.slice(-1)[0],
