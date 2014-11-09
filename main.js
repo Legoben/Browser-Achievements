@@ -89,6 +89,8 @@ function removeID() {
     })
 };
 
+
+
 var userid = null;
 checkID();
 
@@ -179,7 +181,6 @@ document.addEventListener("mousedown", function (event) {
         elements.push(clicked.className);
     }
 }, true);
-//alert(clickEl);
         
 
 chrome.runtime.onMessage.addListener(

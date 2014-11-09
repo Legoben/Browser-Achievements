@@ -1,9 +1,16 @@
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        if(request.event != "input"){
-            return   
+
+
+chrome.runtime.sendMessage({
+        event: "input"
+    },
+    function (response) {
+        //do stuff with it
+        console.log("RRR", response)
+        var p = response.pattern;
+        if(p != ''){
+            p = "." + p;
         }
-        
-        alert("INPUT EVENT")
+        document.getElementById("pattern").value = p;
+        document.getElementById("hostname").value = response.host;
     }
-)
+);

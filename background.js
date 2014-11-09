@@ -5,6 +5,8 @@ chrome.contextMenus.create({
     "onclick": clickHandler
 });
 
+var resp = []
+
 function clickHandler(i) {
     chrome.tabs.query({
         active: true,
@@ -13,8 +15,9 @@ function clickHandler(i) {
         chrome.tabs.sendMessage(tabs[0].id, {
             greeting: "clickCL"
         }, function (response) {
-             alert(response.farewell + 'AND' + response.host);
-        });
+            resp.push({"pattern":response.farewell, "host":response.host});
+            console.log(resp)
+       });
     });
 }
 
@@ -49,12 +52,14 @@ function test(e){
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-      if(request.event != "notif"){
-        return
-      }
+      if(request.event == "notif"){
       console.log("HERE")
       console.log(request);
       chrome.notifications.create(request.id, request.cn, function(e){console.log(e)})
+  
+      } else if (request.event == "input"){
+            sendResponse(resp.slice(-1)[0])
+      }
   }
 )
 
