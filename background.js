@@ -16,7 +16,12 @@ function clickHandler(i) {
             greeting: "clickCL"
         }, function (response) {
             resp.push({"pattern":response.farewell, "host":response.host});
-            
+            chrome.browserAction.setBadgeBackgroundColor({
+            color: [0, 255, 0, 255]
+        });
+        chrome.browserAction.setBadgeText({
+            text: 'CLCK'
+        });
             console.log(resp)
        });
     });
