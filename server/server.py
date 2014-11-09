@@ -65,9 +65,9 @@ class CompleteAchievement(CorsMixin, web.RequestHandler):
             #self.write(json.dumps({"error":"Already got Achievement"}))
             #return
 
-        if "image" not in tach[0]:
+        if "image" not in tach[0] or tach[0]['image'] == '':
             print("HERE!")
-            tach[0]["image"] = "https://files.helloben.co/upload/uploads/f545f20f28ad8a.jpg" #rick
+            tach[0]["image"] = "https://files.helloben.co/upload/uploads/f545f8a88a3a5e.png" #rick
             #tach[0]["image"] = "https://files.helloben.co/upload/uploads/f545f0f24ea11d.jpg" #rick
 
         tattr = {"title":tach[0]['title'], "desc":tach[0]['desc'], "image":tach[0]["image"]}

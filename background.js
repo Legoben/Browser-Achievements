@@ -1,6 +1,6 @@
 
 chrome.contextMenus.create({
-    "title": "Make this an Achievements",
+    "title": "Make this an Achievement",
     "contexts": ["page", "selection", "image", "link"],
     "onclick": clickHandler
 });
