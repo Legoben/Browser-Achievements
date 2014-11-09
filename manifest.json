@@ -15,6 +15,9 @@
             "js": ["jquery.js", "main.js"]
     }
   ],
+    "background": {
+            "scripts": ["background.js"]
+  },
     "web_accessible_resources": ["inject-raw.js"],
     "permissions": ["cookies", "http://*/*", "https://*/*", "storage"]
 }

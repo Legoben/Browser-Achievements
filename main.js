@@ -103,6 +103,7 @@ function main() {
         },
         success: function (r) {
             allevents = r
+            //chrome.browserAction.setBadgeText({"text": "" + r.length})
             console.log(allevents);
             for (var i = 0; i < allevents.length; i++) {
                 console.log("here")
