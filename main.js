@@ -98,6 +98,11 @@ function notifCallback() {
 }
 
 function clickCallback() {
+<<<<<<< HEAD
+=======
+    console.log("HAI WORLD")
+    
+>>>>>>> 0c2cdf24344d7f0a9b951e5c8a56b555683d1ce3
     var id = $(this).attr("BAClickID");
     console.log("ID", id)
     $.ajax({
@@ -163,24 +168,40 @@ function main() {
 
 }
 
+<<<<<<< HEAD
 
 var clickEl = null;
+=======
+var elements = [0];
+
+console.log(elements)
+console.log(elements.slice(-1)[0])
+>>>>>>> 0c2cdf24344d7f0a9b951e5c8a56b555683d1ce3
 
 document.addEventListener("mousedown", function (event) {
     //right click
     if (event.button == 2) {
         console.log("CLICK!")
         var clicked = event.target;
+<<<<<<< HEAD
         window.clickEl = clicked.className;
         alert(window.clickEl);
     }
 }, true);
 //alert(clickEl);
+=======
+        elements.push(clicked.className);
+        alert(elements.slice(-1)[0]);
+    }
+}, true);
+alert(elements.slice(-1)[0])
+>>>>>>> 0c2cdf24344d7f0a9b951e5c8a56b555683d1ce3
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         console.log(sender.tab ?
             "from a content script:" + sender.tab.url :
             "from the extension");
+<<<<<<< HEAD
         if (request.greeting == "clickCL") {
             sendResponse({
                 farewell: window.clickEL
@@ -194,3 +215,11 @@ s.onload = function () {
 };
 
 (document.head || document.documentElement).appendChild(s);
+=======
+        if (request.greeting == "clickCL")
+            sendResponse({
+                farewell: elements.slice(-1)[0]
+            });
+    }
+);
+>>>>>>> 0c2cdf24344d7f0a9b951e5c8a56b555683d1ce3
