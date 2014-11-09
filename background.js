@@ -1,3 +1,4 @@
+
 chrome.contextMenus.create({
     "title": "Buzz This",
     "contexts": ["page", "selection", "image", "link"],
@@ -32,10 +33,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     });
 });
 
-function test(){
-    console.log("here!")   
-}
-
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
       console.log("HERE")
@@ -43,3 +40,4 @@ chrome.runtime.onMessage.addListener(
       chrome.notifications.create(request.id, request.cn, test)
   }
 )
+

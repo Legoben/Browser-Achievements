@@ -152,9 +152,32 @@ function main() {
         }
     });
 
-
-
 }
+
+
+//content script
+var clickedEl = null;
+
+document.addEventListener("mousedown", function (event) {
+    //right click
+    if (event.button == 2) {
+        clickedEl = event.target;
+        console.log("Click!");
+    }
+}, true);
+
+chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
+    if (request == "getClickedEl") {
+        console.log("Recived Message!");
+        sendResponse({
+            value: clickedEl.value
+        });
+    }
+});
+
+
+
+
 var s = document.createElement('script');
 s.src = chrome.extension.getURL('inject-raw.js');
 s.onload = function () {
