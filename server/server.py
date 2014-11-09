@@ -1,6 +1,7 @@
 from tornado import web, ioloop
 import json
 from tornado_cors import CorsMixin
+import urlparse
 
 print("Restarted")
 
@@ -86,6 +87,7 @@ class CompleteAchievement(CorsMixin, web.RequestHandler):
 
 class NewUser(web.RequestHandler):
     def get(self, *args, **kwargs):
+
         print("here")
 
         uid = self.get_argument("uid", None)
@@ -97,7 +99,22 @@ class NewUser(web.RequestHandler):
 
         open("users.json", "w").write(json.dumps(users))
 
+class GetCount(web.RequestHandler):
+    def get(self, *args, **kwargs):
+        self.add_header("Content-Type","text/plain")
+        url = self.get_argument("url", None)
+        if url == None:
+            return
 
+        parsed = urlparse.urlparse(url)
+        host = parsed.netloc
+
+        info = json.loads(open("urls.json").read())
+        if host not in info:
+            return
+
+        #rint(len(info[host]))
+        self.write(str(len(info[host])))
 
 
 
@@ -110,6 +127,9 @@ application = web.Application([
     (r"/ca/([^/]+)", CompleteAchievement),
     (r"/ca", CompleteAchievement),
     (r"/newuser", NewUser),
+    (r"/newuser/([^/]+)", NewUser),
+    (r"/getcount/([^/]+)", GetCount),
+    (r"/getcount", GetCount),
 ], debug=True)
 
 

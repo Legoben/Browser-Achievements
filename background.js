@@ -1,3 +1,4 @@
+
 var myURL = "about:blank";
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     chrome.tabs.getSelected(null, function (tab) {
@@ -21,3 +22,12 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         });
     });
 });
+
+function clickHandler(info){
+    
+}
+chrome.contextMenus.create({
+    "title": "Make this an Achievement",
+    "contexts": ["page", "selection", "image", "link"],
+    "onclick" : clickHandler
+})

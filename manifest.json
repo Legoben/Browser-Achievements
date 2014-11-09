@@ -4,6 +4,9 @@
     "description": "Achievements for web browsing!",
     "version": "1",
     "manifest_version": 2,
+    "icons": {
+          "16": "icon16.png"
+    },
     "browser_action": {
         "default_icon": "icon.png",
         "default_popup": "popup.html"
@@ -19,5 +22,5 @@
             "scripts": ["background.js"]
   },
     "web_accessible_resources": ["inject-raw.js"],
-    "permissions": ["cookies", "http://*/*", "https://*/*", "storage", "tabs"]
+    "permissions": ["cookies", "http://*/*", "https://*/*", "storage", "tabs", "contextMenus"]
 }
