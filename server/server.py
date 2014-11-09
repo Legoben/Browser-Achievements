@@ -2,8 +2,6 @@ from tornado import web, ioloop
 import json
 from tornado_cors import CorsMixin
 
-
-
 print("Restarted")
 
 class MainHandler(web.RequestHandler):
