@@ -16,6 +16,7 @@ function clickHandler(i) {
             greeting: "clickCL"
         }, function (response) {
             resp.push({"pattern":response.farewell, "host":response.host});
+            
             console.log(resp)
        });
     });
