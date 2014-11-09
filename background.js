@@ -13,7 +13,7 @@ function clickHandler(i) {
         chrome.tabs.sendMessage(tabs[0].id, {
             greeting: "clickCL"
         }, function (response) {
-            console.log(response.farewell);
+            alert(response.farewell);
         });
     });
 }
