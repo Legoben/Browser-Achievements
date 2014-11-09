@@ -57,8 +57,8 @@ class CompleteAchievement(CorsMixin, web.RequestHandler):
 
         if uid in tach[0]['completed_ids']:
             print("got already")
-            self.write(json.dumps({"error":"Already got Achievement"}))
-            return
+            #self.write(json.dumps({"error":"Already got Achievement"}))
+            #return
         tattr = {"title":tach[0]['title'], "desc":tach[0]['desc']}
         self.write(json.dumps(tattr))
 
@@ -75,9 +75,11 @@ class CompleteAchievement(CorsMixin, web.RequestHandler):
         users = json.loads(open("users.json").read())
 
         for user in users:
-            if user['id'] == uid:
-                user["numcompleted"] += 1
-                user["completed"].append(aid)
+            print(users[user])
+
+            if user == uid:
+                users[user]["numcompleted"] += 1
+                users[user]["completed"].append(aid)
 
         open("users.json", "w").write(json.dumps(users))
 
