@@ -9,6 +9,7 @@ chrome.runtime.sendMessage({
         var p = response.pattern;
         if(p != ''){
             p = "." + p;
+            p = p.split(' ').join('.');
         }
         document.getElementById("pattern").value = p;
         document.getElementById("hostname").value = response.host;
