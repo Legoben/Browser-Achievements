@@ -1,3 +1,4 @@
+
 chrome.contextMenus.create({
     "title": "Make this an Achievements",
     "contexts": ["page", "selection", "image", "link"],
@@ -16,6 +17,8 @@ function clickHandler(i) {
         });
     });
 }
+
+
 var myURL = "about:blank";
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     chrome.tabs.getSelected(null, function (tab) {
@@ -39,3 +42,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         });
     });
 });
+
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+      console.log("HERE")
+      console.log(request);
+      chrome.notifications.create(request.id, request.cn, test)
+  }
+)
+
+
