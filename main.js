@@ -93,20 +93,22 @@ var userid = null;
 checkID();
 
 
-function notifCallback(){
-    console.log("Hai");   
+function notifCallback() {
+    console.log("Hai");
 }
 
-function clickCallback(){
+function clickCallback() {
+    console.log("HAI WORLD")
+    
     var id = $(this).attr("BAClickID");
-    console.log("ID",id)
+    console.log("ID", id)
     $.ajax({
         url: 'https://ba.ngrok.com/ca',
         data: {
             uid: userid['id'],
             aid: id,
             url: document.location.hostname
-         },
+        },
         success: function (r) {
             console.log("Here!!!!")
             if (typeof r == 'string') {
@@ -116,14 +118,23 @@ function clickCallback(){
                 console.log('Already Got!');
                 return;
             }
-            
-            var notifoptions = {"type":"basic", "iconUrl":r.image,"title":r.title, "message":r.desc}
-            
+
+            var notifoptions = {
+                "type": "basic",
+                "iconUrl": r.image,
+                "title": r.title,
+                "message": r.desc
+            }
+
             //console.log(notifoptions)
-            
-            chrome.runtime.sendMessage({"event":"notif","cn":notifoptions, "id":uniqid()}, function(response) {
-  console.log(response.farewell);
-})
+
+            chrome.runtime.sendMessage({
+                "event": "notif",
+                "cn": notifoptions,
+                "id": uniqid()
+            }, function (response) {
+                console.log(response.farewell);
+            })
             //chrome.notifications.create(uniqid(), notifoptions, notifCallback)
         }
     })
@@ -154,30 +165,29 @@ function main() {
 
 }
 
-var cliEl = null;
+var elements = [0];
 
-document.addEventListener("mousedown", function(event){
+console.log(elements)
+console.log(elements.slice(-1)[0])
+
+document.addEventListener("mousedown", function (event) {
     //right click
-    if(event.button == 2) { 
+    if (event.button == 2) {
         console.log("CLICK!")
         var clicked = event.target;
-        cliEl = clicked.className;
-        alert(cliEl);
+        elements.push(clicked.className);
+        alert(elements.slice(-1)[0]);
     }
 }, true);
+alert(elements.slice(-1)[0])
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-    if (request.greeting == "clickCL")
-      sendResponse({farewell: cliEL});
-  });
-
-var s = document.createElement('script');
-s.src = chrome.extension.getURL('inject-raw.js');
-s.onload = function () {
-    this.parentNode.removeChild(this);
-};
-
-(document.head || document.documentElement).appendChild(s);
+    function (request, sender, sendResponse) {
+        console.log(sender.tab ?
+            "from a content script:" + sender.tab.url :
+            "from the extension");
+        if (request.greeting == "clickCL")
+            sendResponse({
+                farewell: elements.slice(-1)[0]
+            });
+    }
+);

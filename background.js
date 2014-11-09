@@ -13,7 +13,7 @@ function clickHandler(i) {
         chrome.tabs.sendMessage(tabs[0].id, {
             greeting: "clickCL"
         }, function (response) {
-            console.log(response.farewell);
+            alert(response.farewell + 'test test');
         });
     });
 }
@@ -43,12 +43,15 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     });
 });
 
+function test(e){
+    console.log("Notif Callback")   
+}
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
       console.log("HERE")
       console.log(request);
-      chrome.notifications.create(request.id, request.cn, test)
+      chrome.notifications.create(request.id, request.cn, function(e){console.log(e)})
   }
 )
 
