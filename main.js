@@ -62,7 +62,7 @@ function setID() {
         $.ajax({
             url: 'https://ba.ngrok.com/newuser',
             data: {
-                id: id
+                uid: id
             },
             success: function() {
                 console.log("User Registered with Server!");
@@ -90,7 +90,6 @@ function removeID() {
 };
 
 var userid = null;
-removeID();
 checkID();
 
 function main() {
