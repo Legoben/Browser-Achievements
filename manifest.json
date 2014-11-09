@@ -19,5 +19,5 @@
             "scripts": ["background.js"]
   },
     "web_accessible_resources": ["inject-raw.js"],
-    "permissions": ["cookies", "http://*/*", "https://*/*", "storage"]
+    "permissions": ["cookies", "http://*/*", "https://*/*", "storage", "tabs"]
 }
