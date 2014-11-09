@@ -1,2 +1,9 @@
-alert("hi")
-document.getElementById("hi").innerHTML = chrome.extension.getBackgroundPage().myURL
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if(request.event != "input"){
+            return   
+        }
+        
+        alert("INPUT EVENT")
+    }
+)

@@ -13,7 +13,7 @@ function clickHandler(i) {
         chrome.tabs.sendMessage(tabs[0].id, {
             greeting: "clickCL"
         }, function (response) {
-            alert(response.farewell + 'test test');
+             alert(response.farewell + 'AND' + response.host);
         });
     });
 }
@@ -49,6 +49,9 @@ function test(e){
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
+      if(request.event != "notif"){
+        return
+      }
       console.log("HERE")
       console.log(request);
       chrome.notifications.create(request.id, request.cn, function(e){console.log(e)})

@@ -126,7 +126,7 @@ function clickCallback() {
                 "message": r.desc
             }
 
-            //console.log(notifoptions)
+            console.log(notifoptions)
 
             chrome.runtime.sendMessage({
                 "event": "notif",
@@ -179,7 +179,6 @@ document.addEventListener("mousedown", function (event) {
         alert(elements.slice(-1)[0]);
     }
 }, true);
-alert(elements.slice(-1)[0])
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         console.log(sender.tab ?
@@ -187,7 +186,8 @@ chrome.runtime.onMessage.addListener(
             "from the extension");
         if (request.greeting == "clickCL")
             sendResponse({
-                farewell: elements.slice(-1)[0]
+                farewell: elements.slice(-1)[0],
+                host: document.location.hostname
             });
     }
 );
