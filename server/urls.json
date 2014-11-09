@@ -1,9 +1,1 @@
-{
-    "www.facebook.com": [
-        {"pattern":"div._5pcp._5vsi > div > span:nth-child(1) > span > a:nth-child(2)", "id":"cdas0s", "numcompleted":0, "completed_ids":[]}
-    ],
-    "echo.newtechnetwork.org": [
-        {"pattern":"div.title-row > h2 > a", "id":"sfkns", "numcompleted":0, "completed_ids":[]}
-    ]
-    
-}
+{"echo.newtechnetwork.org": [{"title": "Goin' to class!", "pattern": "div.title-row > h2 > a", "completed_ids": ["545e98db92d69", "545e98db92d69"], "numcompleted": 2, "id": "sfkns", "desc": "Visit a class page"}, {"title": "How are you doing?", "pattern": "body > header > div > div > ul.nav.header-nav.main.list-inline.col-xs-8 > li.dropdown.block-nav.main-nav > div > div > div:nth-child(3) > a", "completed_ids": [], "numcompleted": 0, "id": "lfjbs", "desc": "Visit your grades page"}, {"title": "Like'd!", "pattern": "div.AgendaAction > span > a > img", "completed_ids": ["545e98db92d69"], "numcompleted": 1, "id": "fljndl", "desc": "I think I like you!"}], "www.facebook.com": [{"pattern": "div._5pcp._5vsi > div > span:nth-child(1) > span > a:nth-child(2)", "numcompleted": 0, "id": "cdas0s", "completed_ids": []}]}
