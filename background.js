@@ -1,3 +1,21 @@
+chrome.contextMenus.create({
+    "title": "Make this an Achievements",
+    "contexts": ["page", "selection", "image", "link"],
+    "onclick": clickHandler
+});
+
+function clickHandler(i) {
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true
+    }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            greeting: "clickCL"
+        }, function (response) {
+            console.log(response.farewell);
+        });
+    });
+}
 var myURL = "about:blank";
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     chrome.tabs.getSelected(null, function (tab) {
@@ -21,16 +39,3 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         });
     });
 });
-function clickHandler(info) {
-    console.log("callback!");
-        chrome.tabs.sendMessage(tab.id, "getClickedEl", function (clickedEl) {
-            elt.value = clickedEl.value;
-        });
-}
-chrome.contextMenus.create({
-        "title": "Make this an Achievement",
-        "contexts": ["all"],
-        "onclick": clickHandler
-    }
-        
-);

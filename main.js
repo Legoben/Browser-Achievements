@@ -116,29 +116,25 @@ function main() {
 
 }
 
+var cliEl = null;
 
-//content script
-var clickedEl = null;
-
-document.addEventListener("mousedown", function (event) {
+document.addEventListener("mousedown", function(event){
     //right click
-    if (event.button == 2) {
-        clickedEl = event.target;
-        console.log("Click!");
+    if(event.button == 2) { 
+        console.log("CLICK!")
+        var clicked = event.target;
+        cliEl = clicked.className;
+        alert(cliEl);
     }
 }, true);
-
-chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request == "getClickedEl") {
-        console.log("Recived Message!");
-        sendResponse({
-            value: clickedEl.value
-        });
-    }
-});
-
-
-
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    if (request.greeting == "clickCL")
+      sendResponse({farewell: cliEL});
+  });
 
 var s = document.createElement('script');
 s.src = chrome.extension.getURL('inject-raw.js');
