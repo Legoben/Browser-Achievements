@@ -64,7 +64,7 @@ function setID() {
             data: {
                 uid: id
             },
-            success: function() {
+            success: function () {
                 console.log("User Registered with Server!");
             }
         });

@@ -11,6 +11,7 @@
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
+            "css": ["toast.css"],
             "js": ["jquery.js", "main.js"]
     }
   ],

@@ -16,17 +16,26 @@ function BA_Click(id, userid, url) {
             return xhr;
         },
         success: function (r) {
-            if(typeof r == 'string'){
+            if (typeof r == 'string') {
                 r = JSON.parse(r);
             }
-            if(r.error != undefined){
+            if (r.error != undefined) {
                 console.log('Already Got!');
                 return;
-            }else{
+            } else {
                 console.log(r);
-                console.log('Sorry, Such Win!');
+                $('head').prepend("<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>")
+                $('body').prepend('<div id="noti"></div>');
+                //$('#noti').prepend('<img src="https://files.helloben.co/upload/uploads/f545ed87fbf9c1.png"/>')
+                $('#noti').prepend('<h3 id="title"><h3>');
+                $('#noti').append('<h5 id="desc"></h5>');
+                $('#title').text(r.title);
+                $('#desc').text(r.desc);
+                setTimeout(function () {
+                    $('#noti').fadeOut();
+                }, 5000);
             }
-            
+
         }
     });
 }

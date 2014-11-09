@@ -1,0 +1,19 @@
+#noti {
+    background-color: #ecf0f1;
+    width: 170px;
+    height: 70px;
+    border-radius: 15px;
+    border: 2px groove grey;
+    -webkit-box-shadow: 7px 7px 5px -2px rgba(50, 50, 50, 0.75);
+-moz-box-shadow:    7px 7px 5px -2px rgba(50, 50, 50, 0.75);
+box-shadow:         7px 7px 5px -2px rgba(50, 50, 50, 0.75);
+    padding-bottom: 30px;
+    padding-left: 20px;
+    font-family: 'Ubuntu';
+    position: fixed;
+    z-index: 999;
+    right: 15px;
+}
+#title {
+    font-size: 20px;
+}
