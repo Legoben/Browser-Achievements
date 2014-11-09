@@ -2,8 +2,12 @@ from tornado import web, ioloop
 import json
 from tornado_cors import CorsMixin
 import urlparse
+import string
+import random
 
 print("Restarted")
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+            return ''.join(random.choice(chars) for _ in range(size))
 
 class MainHandler(web.RequestHandler):
     def get(self):
@@ -60,7 +64,13 @@ class CompleteAchievement(CorsMixin, web.RequestHandler):
             print("got already")
             #self.write(json.dumps({"error":"Already got Achievement"}))
             #return
-        tattr = {"title":tach[0]['title'], "desc":tach[0]['desc']}
+
+        if "image" not in tach[0]:
+            print("HERE!")
+            tach[0]["image"] = "https://files.helloben.co/upload/uploads/f545f20f28ad8a.jpg" #rick
+            #tach[0]["image"] = "https://files.helloben.co/upload/uploads/f545f0f24ea11d.jpg" #rick
+
+        tattr = {"title":tach[0]['title'], "desc":tach[0]['desc'], "image":tach[0]["image"]}
         self.write(json.dumps(tattr))
 
         self.finish()
@@ -113,9 +123,42 @@ class GetCount(web.RequestHandler):
         if host not in info:
             return
 
-        #rint(len(info[host]))
         self.write(str(len(info[host])))
 
+class AddAchievement(CorsMixin,web.RequestHandler):
+    CORS_ORIGIN = '*'
+
+    CORS_HEADERS = 'Content-Type'
+
+    def post(self, *args, **kwargs):
+        args =["hostname", "pattern", "title", "desc", "image"]
+        data = {}
+
+        for a in args:
+            data[a] = self.get_argument(a, None)
+
+        tele = {"pattern": data['pattern'], "completed_ids":[],  "numcompleted":0, "id":id_generator(), "title":data["title"], "desc":data["desc"], "image": data['image']}
+        print(tele)
+
+        urls = json.loads(open("urls.json").read())
+
+        if data['hostname'] not in urls:
+            urls[data['hostname']] = []
+
+        urls[data['hostname']].append(tele)
+
+        open("urls.json", "w").write(json.dumps(urls))
+
+        print("Done!")
+        self.write("Done!")
+
+
+
+
+
+class AForm(web.RequestHandler):
+    def get(self, *args, **kwargs):
+        self.render("../templates/form.html")
 
 
 
@@ -130,6 +173,10 @@ application = web.Application([
     (r"/newuser/([^/]+)", NewUser),
     (r"/getcount/([^/]+)", GetCount),
     (r"/getcount", GetCount),
+    (r"/adda", AddAchievement),
+    (r"/adda/([^/]+)", AddAchievement),
+    (r"/form", AForm),
+
 ], debug=True)
 
 

@@ -1,3 +1,12 @@
+chrome.contextMenus.create({
+    "title": "Buzz This",
+    "contexts": ["page", "selection", "image", "link"],
+    "onclick" : clickHandler
+  });
+
+function clickHandler(i){
+    alert("here")   
+}
 
 var myURL = "about:blank";
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
@@ -23,11 +32,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     });
 });
 
-function clickHandler(info){
-    
+function test(){
+    console.log("here!")   
 }
-chrome.contextMenus.create({
-    "title": "Make this an Achievement",
-    "contexts": ["page", "selection", "image", "link"],
-    "onclick" : clickHandler
-})
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+      console.log("HERE")
+      console.log(request);
+      chrome.notifications.create(request.id, request.cn, test)
+  }
+)

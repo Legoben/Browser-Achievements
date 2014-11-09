@@ -92,6 +92,43 @@ function removeID() {
 var userid = null;
 checkID();
 
+
+function notifCallback(){
+    console.log("Hai");   
+}
+
+function clickCallback(){
+    var id = $(this).attr("BAClickID");
+    console.log("ID",id)
+    $.ajax({
+        url: 'https://ba.ngrok.com/ca',
+        data: {
+            uid: userid['id'],
+            aid: id,
+            url: document.location.hostname
+         },
+        success: function (r) {
+            console.log("Here!!!!")
+            if (typeof r == 'string') {
+                r = JSON.parse(r);
+            }
+            if (r.error != undefined) {
+                console.log('Already Got!');
+                return;
+            }
+            
+            var notifoptions = {"type":"basic", "iconUrl":r.image,"title":r.title, "message":r.desc}
+            
+            //console.log(notifoptions)
+            
+            chrome.runtime.sendMessage({"event":"notif","cn":notifoptions, "id":uniqid()}, function(response) {
+  console.log(response.farewell);
+})
+            //chrome.notifications.create(uniqid(), notifoptions, notifCallback)
+        }
+    })
+}
+
 function main() {
     console.log(userid);
     var allevents;
@@ -108,7 +145,8 @@ function main() {
             for (var i = 0; i < allevents.length; i++) {
                 console.log("here")
                 $(allevents[i].pattern).each(function () {
-                    $(this).attr("onclick", "BA_Click('" + allevents[i].id + "','" + userid.id + "')");
+                    $(this).click(clickCallback);
+                    $(this).attr("BAClickID", allevents[i].id);
                 });
             }
         }
