@@ -96,12 +96,12 @@ checkID();
 
 
 function notifCallback() {
-    console.log("Hai");
+    console.log("NOTI GOT");
 }
 
 function clickCallback() {
 
-    console.log("HAI WORLD")
+    //console.log("HAI WORLD")
 
     var id = $(this).attr("BAClickID");
     console.log("ID", id)
@@ -144,7 +144,7 @@ function clickCallback() {
 }
 
 function main() {
-    console.log(userid);
+    //console.log(userid);
     var allevents;
     $.ajax({
         url: 'https://ba.ngrok.com/getpatterns',
@@ -155,9 +155,9 @@ function main() {
         success: function (r) {
             allevents = r
             //chrome.browserAction.setBadgeText({"text": "" + r.length})
-            console.log(allevents);
+            //console.log(allevents);
             for (var i = 0; i < allevents.length; i++) {
-                console.log("here")
+                //console.log("here")
                 $(allevents[i].pattern).each(function () {
                     $(this).click(clickCallback);
                     $(this).attr("BAClickID", allevents[i].id);
@@ -176,7 +176,7 @@ console.log(elements.slice(-1)[0])
 document.addEventListener("mousedown", function (event) {
     //right click
     if (event.button == 2) {
-        console.log("CLICK!")
+        //console.log("CLICK!")
         var clicked = event.target;
         elements.push(clicked.className);
     }
