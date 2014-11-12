@@ -62,12 +62,12 @@ class CompleteAchievement(CorsMixin, web.RequestHandler):
 
         if uid in tach[0]['completed_ids']:
             print("got already")
-            #self.write(json.dumps({"error":"Already got Achievement"}))
-            #return
+            self.write(json.dumps({"error":"Already got Achievement"}))
+            return
 
         if "image" not in tach[0] or tach[0]['image'] == '':
             print("HERE!")
-            tach[0]["image"] = "https://files.helloben.co/upload/uploads/f545f8a88a3a5e.png" #rick
+            tach[0]["image"] = "https://files.helloben.co/upload/uploads/f545f8a88a3a5e.png" #not rick
             #tach[0]["image"] = "https://files.helloben.co/upload/uploads/f545f0f24ea11d.jpg" #rick
 
         tattr = {"title":tach[0]['title'], "desc":tach[0]['desc'], "image":tach[0]["image"]}
@@ -118,7 +118,12 @@ class GetCount(web.RequestHandler):
 
         parsed = urlparse.urlparse(url)
         host = parsed.netloc
+        #host = url
 
+        if parsed.netloc == "":
+            host = url
+
+        print(host)
         info = json.loads(open("urls.json").read())
         if host not in info:
             return

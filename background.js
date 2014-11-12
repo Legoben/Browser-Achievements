@@ -42,7 +42,12 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             r = xmlHttp.responseText;
             return xmlHttp.responseText;
         }
-        var r = httpGet('https://ba.ngrok.com/getcount?url=' + myURL);
+        
+        var parser = document.createElement('a');
+        parser.href = myURL;
+        
+        //alert(parser.host)
+        var r = httpGet('https://ba.ngrok.com/getcount?url=' + parser.host + "&id=null");
         chrome.browserAction.setBadgeBackgroundColor({
             color: [255, 0, 0, 255]
         });
